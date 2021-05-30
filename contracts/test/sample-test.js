@@ -65,4 +65,12 @@ describe("ContractualNFT", function () {
       "Agreement not complete."
     );
   });
+
+  it("Should get agreements for address", async function () {
+    const agreements = await contractualNFT.getAgreementsForAddress(
+      addr1.address
+    );
+    expect(agreements.length).to.equal(1);
+    expect(agreements[0]).to.equal(ethers.BigNumber.from("1"));
+  });
 });

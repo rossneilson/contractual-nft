@@ -3,9 +3,7 @@
  */
 require("@nomiclabs/hardhat-waffle");
 require("@nomiclabs/hardhat-ethers");
-// require("@nomiclabs/hardhat-truffle5");
 require("@nomiclabs/hardhat-etherscan");
-// require("hardhat-typechain");
 require("hardhat-deploy");
 require("@typechain/hardhat");
 require("./tasks/localTest");

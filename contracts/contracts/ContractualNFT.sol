@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -91,9 +91,9 @@ contract ContractualNFT is ERC721 {
     return agreementIdToAgreement[agreementId];
   }
 
-  // function getAgreementsForAddress(address addr) public view returns(Agreement[] memory agreements) {
-  //   return addressToAgreements[addr];
-  // }
+  function getAgreementsForAddress(address addr) public view returns(uint[] memory agreements) {
+    return addressToAgreements[addr];
+  }
 
   function getCounter() public view returns(uint number) {
     return counter;

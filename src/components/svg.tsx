@@ -16,11 +16,11 @@ const Add = (
     width="44"
     height="44"
     viewBox="0 0 24 24"
-    stroke-width="1.5"
+    strokeWidth="1.5"
     stroke="#ffffff"
     fill="none"
-    stroke-linecap="round"
-    stroke-linejoin="round"
+    strokeLinecap="round"
+    strokeLinejoin="round"
   >
     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
     <path d="M9 12h6" />
@@ -36,11 +36,11 @@ const CreateAgreement = (
     width="44"
     height="44"
     viewBox="0 0 24 24"
-    stroke-width="1.5"
+    strokeWidth="1.5"
     stroke="#ffffff"
     fill="none"
-    stroke-linecap="round"
-    stroke-linejoin="round"
+    strokeLinecap="round"
+    strokeLinejoin="round"
   >
     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
     <path d="M20 17v-12c0 -1.121 -.879 -2 -2 -2s-2 .879 -2 2v12l2 2l2 -2z" />
@@ -86,6 +86,77 @@ const Wallet = (
   </svg>
 );
 
+const SmallCheckBox = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="12"
+    height="12"
+    viewBox="0 0 24 24"
+    strokeWidth="1.5"
+    stroke="#ffffff"
+    fill="none"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <rect x="4" y="4" width="16" height="16" rx="2" />
+    <path d="M9 12l2 2l4 -4" />
+  </svg>
+);
+
+const SmallBox = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="12"
+    height="12"
+    viewBox="0 0 24 24"
+    strokeWidth="1.5"
+    stroke="#ffffff"
+    fill="none"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <rect x="4" y="4" width="16" height="16" rx="2" />
+  </svg>
+);
+
+const SmallCrosskBox = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="12"
+    height="12"
+    viewBox="0 0 24 24"
+    strokeWidth="1.5"
+    stroke="#ffffff"
+    fill="none"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <rect x="4" y="4" width="16" height="16" rx="2" />
+    <path d="M10 10l4 4m0 -4l-4 4" />
+  </svg>
+);
+
+const Refresh = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="44"
+    height="44"
+    viewBox="0 0 24 24"
+    strokeWidth="1.5"
+    stroke="#ffffff"
+    fill="none"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
+    <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />
+  </svg>
+);
+
 export interface SvgProps {
   icon: string;
 }
@@ -104,6 +175,18 @@ export const SVG = ({ icon }: SvgProps) => {
       break;
     case "wallet":
       svgIcon = Wallet;
+      break;
+    case "checkBox":
+      svgIcon = SmallCheckBox;
+      break;
+    case "neutralBox":
+      svgIcon = SmallBox;
+      break;
+    case "crossBox":
+      svgIcon = SmallCrosskBox;
+      break;
+    case "refresh":
+      svgIcon = Refresh;
       break;
     default:
       throw new Error("Please specify pattern type");

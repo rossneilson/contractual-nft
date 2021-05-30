@@ -5,6 +5,7 @@ import { useWeb3React } from "@web3-react/core";
 // import "./App.css";
 import Header from "./components/Header";
 import CreateAgreement from "./components/CreateAgreement";
+import UserAgreements from "./components/UserAgreements";
 
 const Wrap = styled.section`
   text-align: center;
@@ -28,6 +29,7 @@ function App() {
       />
       <Header />
       {account ? <CreateAgreement /> : <div>Connect wallet pls</div>}
+      {account ? <UserAgreements /> : <div>Connect wallet pls</div>}
     </Wrap>
   );
 }

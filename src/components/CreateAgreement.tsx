@@ -1,10 +1,11 @@
 import React, { useState, ChangeEvent } from "react";
 import styled from "styled-components";
 import { useWeb3React } from "@web3-react/core";
+import { create } from "ipfs-http-client";
 
 import SVG from "./svg";
 
-import { CreateAgreementContract } from "../web3";
+import { createAgreementContract, getOnChainAgreements } from "../web3";
 
 const Wrapper = styled.section`
   width: 75%;
@@ -46,7 +47,7 @@ const Submit = styled.button`
 `;
 
 export const CreateAgreement = () => {
-  const { account } = useWeb3React();
+  const { account, library } = useWeb3React();
   const [cptys, setCptys] = useState<string[]>([""]);
   const [agreementText, setAgreementText] = useState<string>("");
   const addressInputs: Array<React.ReactNode> = [];
@@ -59,7 +60,6 @@ export const CreateAgreement = () => {
     }
   };
 
-  console.log({ account, cptys });
   if (account && !(cptys.length > 1)) {
     setCptys([account, ""]);
   }
@@ -89,7 +89,7 @@ export const CreateAgreement = () => {
 
   return (
     <Wrapper>
-      <label>Counterparty Addresses</label>
+      <h2>Counterparty Addresses</h2>
       {addressInputs}
       <AddCptyButton
         onClick={() => {
@@ -106,12 +106,20 @@ export const CreateAgreement = () => {
         value={agreementText}
         onChange={(event: ChangeEvent<HTMLTextAreaElement>) => {
           setAgreementText(event.target.value);
+          if (account) {
+            getOnChainAgreements(account, library);
+          }
         }}
       />
       <Submit
         disabled={!validate()}
         className={`btn btn-${validate() ? "primary" : "warning"}`}
-        onClick={() => CreateAgreementContract(cptys)}
+        onClick={async () => {
+          const ipfs = create({ url: "http://ipfs.infura.io:5001" });
+          const ipfsHash = await ipfs.add(agreementText);
+          console.log({ ipfsHash });
+          createAgreementContract(cptys, library, ipfsHash);
+        }}
       >
         Create Agreement
         <SVG icon="createAgreement" />

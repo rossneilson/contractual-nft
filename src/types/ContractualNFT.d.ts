@@ -29,6 +29,7 @@ interface ContractualNFTInterface extends ethers.utils.Interface {
     "defineAgreement(address[],string)": FunctionFragment;
     "disapproveAgreement(uint256)": FunctionFragment;
     "getAgreement(uint256)": FunctionFragment;
+    "getAgreementsForAddress(address)": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
     "getCounter()": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
@@ -80,6 +81,10 @@ interface ContractualNFTInterface extends ethers.utils.Interface {
   encodeFunctionData(
     functionFragment: "getAgreement",
     values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getAgreementsForAddress",
+    values: [string]
   ): string;
   encodeFunctionData(
     functionFragment: "getApproved",
@@ -144,6 +149,10 @@ interface ContractualNFTInterface extends ethers.utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "getAgreement",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getAgreementsForAddress",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -320,6 +329,11 @@ export class ContractualNFT extends BaseContract {
       }
     >;
 
+    getAgreementsForAddress(
+      addr: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber[]] & { agreements: BigNumber[] }>;
+
     getApproved(
       tokenId: BigNumberish,
       overrides?: CallOverrides
@@ -448,6 +462,11 @@ export class ContractualNFT extends BaseContract {
     }
   >;
 
+  getAgreementsForAddress(
+    addr: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber[]>;
+
   getApproved(
     tokenId: BigNumberish,
     overrides?: CallOverrides
@@ -567,6 +586,11 @@ export class ContractualNFT extends BaseContract {
         })[];
       }
     >;
+
+    getAgreementsForAddress(
+      addr: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber[]>;
 
     getApproved(
       tokenId: BigNumberish,
@@ -718,6 +742,11 @@ export class ContractualNFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    getAgreementsForAddress(
+      addr: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     getApproved(
       tokenId: BigNumberish,
       overrides?: CallOverrides
@@ -827,6 +856,11 @@ export class ContractualNFT extends BaseContract {
 
     getAgreement(
       agreementId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getAgreementsForAddress(
+      addr: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
