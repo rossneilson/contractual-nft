@@ -1,5 +1,5 @@
 // External
-import { ethers, BigNumberish } from "ethers";
+import { ethers, BigNumberish, BigNumber } from "ethers";
 import { CID } from "ipfs-http-client";
 
 import { ContractualNFT__factory } from "../types";
@@ -42,7 +42,6 @@ export async function createAgreementContract(
 }
 
 export async function getAgreements(address: string, library: any) {
-  console.log("WEEE");
   const onChainData = await getOnChainAgreements(address, library);
   console.log({ onChainData });
   const agreements = await getIpfsForAgreements(onChainData);
@@ -57,12 +56,13 @@ export async function getOnChainAgreements(address: string, library: any) {
     signer
   );
   const agreements: any = [];
-  // console.log(await contractualNFTContract.getCounter());
-  // console.log("reeee");
   const agreementIds = await contractualNFTContract.getAgreementsForAddress(
     address
   );
-  console.log(agreementIds);
+  console.log({ agreementIds });
+  agreementIds.forEach((id: BigNumber) => {
+    console.log(id.toNumber());
+  });
   await agreementIds.forEach(async (id, index) => {
     const result = contractualNFTContract.getAgreement(
       ethers.BigNumber.from(id)
@@ -74,17 +74,44 @@ export async function getOnChainAgreements(address: string, library: any) {
 }
 
 export async function getIpfsForAgreements(agreements: any[]) {
-  console.log({ agreements });
   let tempAgreements: any = [];
   agreements.forEach(({ counterparties, ipfsHash }: any, index) => {
-    console.log({ counterparties });
-    console.log({ ipfsHash });
     const data = fetch(
       `https://ipfs.infura.io:5001/api/v0/object/data?arg=${ipfsHash}`,
       { method: "POST" }
     ).then((res) => res.text());
     tempAgreements.push({ counterparties, ipfsHash, data: data });
   });
-  console.log({ tempAgreements });
   return tempAgreements;
+}
+
+export async function getSingleAgreement(library: any, id: string) {
+  const signer = library.getSigner();
+  const contractualNFTContract = ContractualNFT__factory.connect(
+    contractAddress,
+    signer
+  );
+  const result = await contractualNFTContract.getAgreement(
+    ethers.BigNumber.from(id)
+  );
+  console.log({ result });
+  return getIpfsForAgreements([result]);
+}
+
+export async function approveAgreement(library: any, id: number) {
+  const signer = library.getSigner();
+  const contractualNFTContract = ContractualNFT__factory.connect(
+    contractAddress,
+    signer
+  );
+  await contractualNFTContract.approveAgreement(id);
+}
+
+export async function disapproveAgreement(library: any, id: number) {
+  const signer = library.getSigner();
+  const contractualNFTContract = ContractualNFT__factory.connect(
+    contractAddress,
+    signer
+  );
+  await contractualNFTContract.disapproveAgreement(id);
 }

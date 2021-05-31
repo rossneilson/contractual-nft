@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { useWeb3React } from "@web3-react/core";
 import { InjectedConnector } from "@web3-react/injected-connector";
 
@@ -13,9 +14,14 @@ const Wrapper = styled.section`
   margin-bottom: 50px;
 `;
 
-const Title = styled.h1`
+const Title = styled(Link)`
   color: white;
   display: flex;
+  font-size: 200%;
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
 `;
 
 const Account = styled.section`
@@ -34,7 +40,7 @@ function Header() {
 
   return (
     <Wrapper>
-      <Title>
+      <Title to="/agreement">
         <SVG icon="agreement" />
         Contractual NFT
       </Title>

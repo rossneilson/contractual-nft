@@ -5,7 +5,7 @@ import { create } from "ipfs-http-client";
 
 import SVG from "./svg";
 
-import { createAgreementContract, getOnChainAgreements } from "../web3";
+import { createAgreementContract } from "../web3";
 
 const Wrapper = styled.section`
   width: 75%;
@@ -53,7 +53,7 @@ export const CreateAgreement = () => {
   const addressInputs: Array<React.ReactNode> = [];
 
   const validate = () => {
-    if (cptys.filter((el) => el != "").length > 1 && agreementText !== "") {
+    if (cptys.filter((el) => el !== "").length > 1 && agreementText !== "") {
       return true;
     } else {
       return false;
@@ -89,7 +89,7 @@ export const CreateAgreement = () => {
 
   return (
     <Wrapper>
-      <h2>Counterparty Addresses</h2>
+      <h2>Create new agreement</h2>
       {addressInputs}
       <AddCptyButton
         onClick={() => {
@@ -106,9 +106,6 @@ export const CreateAgreement = () => {
         value={agreementText}
         onChange={(event: ChangeEvent<HTMLTextAreaElement>) => {
           setAgreementText(event.target.value);
-          if (account) {
-            getOnChainAgreements(account, library);
-          }
         }}
       />
       <Submit
@@ -117,7 +114,6 @@ export const CreateAgreement = () => {
         onClick={async () => {
           const ipfs = create({ url: "http://ipfs.infura.io:5001" });
           const ipfsHash = await ipfs.add(agreementText);
-          console.log({ ipfsHash });
           createAgreementContract(cptys, library, ipfsHash);
         }}
       >

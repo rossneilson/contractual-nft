@@ -21,10 +21,23 @@
 
 An ERC-721 that allows multiple artists to create an agreement. Then once the art (music/image/etc) is complete all members can approve and an NFT will be minted for each member of the agreement. If there is a dispute then the claim can be taken to a community governance vote based on the final product and the agreement made in the beginning. Can also allow for payment to other addresses on completion.
 
-Developed for the 0xHack hackathon 2021
+---
+
+Developed for the 0xHack hackathon 2021 Polygon bounty
+
+Frontend in /src folder
+
+Solidity contracts in /contracts folder
+
+Contract on mumbai testnet: 0x2726D6DbFf934A0d34291335FA26F30a553a0dDb
+
+---
 
 ## Tech
 * React
-* Ethers
+* Solidity
+* Hardhat
 * Typescript
+* Ethers
+* Typechain
 * Polygon (matic)

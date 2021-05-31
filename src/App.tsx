@@ -1,11 +1,13 @@
 import React from "react";
-import styled from "styled-components";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { RouteComponentProps } from "react-router";
+import styled, { createGlobalStyle } from "styled-components";
 import { useWeb3React } from "@web3-react/core";
 
-// import "./App.css";
 import Header from "./components/Header";
 import CreateAgreement from "./components/CreateAgreement";
 import UserAgreements from "./components/UserAgreements";
+import EditAgreement from "./components/EditAgreement";
 
 const Wrap = styled.section`
   text-align: center;
@@ -15,10 +17,28 @@ const Wrap = styled.section`
   padding: 1%;
 `;
 
+export const GlobalStyle = createGlobalStyle`
+  html {
+    scroll-behavior: smooth;
+  }
+  a {
+    text-decoration: none !important;
+    color: inherit;
+  }
+  a:hover {
+    color: inherit;
+    text-decoration: none !important;
+  }
+`;
+
+interface MatchParams {
+  id: string;
+}
+
+interface Props extends RouteComponentProps<MatchParams> {}
+
 function App() {
   const { account } = useWeb3React();
-  // const provider = new ethers.providers.Web3Provider(library)
-  // const signer = provider.getSigner()
 
   return (
     <Wrap>
@@ -27,9 +47,36 @@ function App() {
         href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
         crossOrigin="anonymous"
       />
-      <Header />
-      {account ? <CreateAgreement /> : <div>Connect wallet pls</div>}
-      {account ? <UserAgreements /> : <div>Connect wallet pls</div>}
+      <BrowserRouter>
+        <Switch>
+          <Route
+            exact
+            path="/agreement"
+            render={() => (
+              <div>
+                <Header />
+                {account ? <CreateAgreement /> : <div>Connect wallet pls</div>}
+                {account ? <UserAgreements /> : null}
+              </div>
+            )}
+          />
+          <Route
+            exact
+            path="/agreement/:id"
+            render={(props: Props) => (
+              <div>
+                <Header />
+                {account ? (
+                  <EditAgreement id={props.match.params.id} />
+                ) : (
+                  <div>Connect wallet pls</div>
+                )}
+              </div>
+            )}
+          />
+          <Redirect to="/agreement" />
+        </Switch>
+      </BrowserRouter>
     </Wrap>
   );
 }

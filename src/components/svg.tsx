@@ -89,8 +89,8 @@ const Wallet = (
 const SmallCheckBox = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="12"
-    height="12"
+    width="22"
+    height="22"
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="#ffffff"
@@ -104,11 +104,45 @@ const SmallCheckBox = (
   </svg>
 );
 
+const CheckBox = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="32"
+    height="32"
+    viewBox="0 0 24 24"
+    strokeWidth="1.5"
+    stroke="#7bc62d"
+    fill="none"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <rect x="4" y="4" width="16" height="16" rx="2" />
+    <path d="M9 12l2 2l4 -4" />
+  </svg>
+);
+
 const SmallBox = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="12"
-    height="12"
+    width="22"
+    height="22"
+    viewBox="0 0 24 24"
+    strokeWidth="1.5"
+    stroke="#ffffff"
+    fill="none"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <rect x="4" y="4" width="16" height="16" rx="2" />
+  </svg>
+);
+const Box = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="32"
+    height="32"
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="#ffffff"
@@ -121,14 +155,32 @@ const SmallBox = (
   </svg>
 );
 
-const SmallCrosskBox = (
+const SmallCrossBox = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="12"
-    height="12"
+    width="22"
+    height="22"
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="#ffffff"
+    fill="none"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <rect x="4" y="4" width="16" height="16" rx="2" />
+    <path d="M10 10l4 4m0 -4l-4 4" />
+  </svg>
+);
+
+const CrossBox = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="32"
+    height="32"
+    viewBox="0 0 24 24"
+    strokeWidth="1.5"
+    stroke="#ff4500"
     fill="none"
     strokeLinecap="round"
     strokeLinejoin="round"
@@ -179,11 +231,20 @@ export const SVG = ({ icon }: SvgProps) => {
     case "checkBox":
       svgIcon = SmallCheckBox;
       break;
+    case "bigCheckBox":
+      svgIcon = CheckBox;
+      break;
     case "neutralBox":
       svgIcon = SmallBox;
       break;
+    case "bigNeutralBox":
+      svgIcon = Box;
+      break;
     case "crossBox":
-      svgIcon = SmallCrosskBox;
+      svgIcon = SmallCrossBox;
+      break;
+    case "bigCrossBox":
+      svgIcon = CrossBox;
       break;
     case "refresh":
       svgIcon = Refresh;

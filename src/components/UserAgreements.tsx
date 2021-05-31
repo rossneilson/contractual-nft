@@ -22,7 +22,7 @@ export interface Agreement {
 
 const Wrapper = styled.section`
   width: 75%;
-  margin: auto;
+  margin: 3% auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
