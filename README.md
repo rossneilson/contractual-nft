@@ -23,13 +23,15 @@ An ERC-721 that allows multiple artists to create an agreement. Then once the ar
 
 ---
 
+[Youtube demo](https://www.youtube.com/watch?v=bjqLk6YSCd4)
+
 Developed for the 0xHack hackathon 2021 Polygon bounty
 
 Frontend in /src folder
 
 Solidity contracts in /contracts folder
 
-Contract on mumbai testnet: 0x2726D6DbFf934A0d34291335FA26F30a553a0dDb
+Contract on mumbai testnet: [0x2726D6DbFf934A0d34291335FA26F30a553a0dDb](https://explorer-mumbai.maticvigil.com/address/0x2726D6DbFf934A0d34291335FA26F30a553a0dDb/transactions)
 
 ---
 
