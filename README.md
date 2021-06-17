@@ -18,6 +18,7 @@
 <br/>
 
 # Contractual NFT
+# [Won Polygon bounty at 0xHack!](https://gitcoin.co/issue/maticnetwork/matic-bounties/21/100025715)
 
 An ERC-721 that allows multiple artists to create an agreement. Then once the art (music/image/etc) is complete all members can approve and an NFT will be minted for each member of the agreement. If there is a dispute then the claim can be taken to a community governance vote based on the final product and the agreement made in the beginning. Can also allow for payment to other addresses on completion.
 
